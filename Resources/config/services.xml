@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="ref_lib_ris.ris_fields_mapping" class="%ref_lib_ris.ris_fields_mapping.class%">
+            <argument>%ref_lib_ris.mapping_fields%</argument>
+        </service>
+
+        <service id="ref_lib_ris.record_processing" class="%ref_lib_ris.record_processing.class%">
+            <argument type="service" id="ref_lib_ris.ris_fields_mapping" />
+        </service>
+
+        <service id="ref_lib_ris.ris_definition" class="%ref_lib_ris.ris_definition.class%" />
+
+        <service id="ref_lib_ris.ris_writer" class="%ref_lib_ris.ris_writer.class%">
+            <argument type="service" id="ref_lib_ris.ris_definition" />
+        </service>
+    </services>
+</container>

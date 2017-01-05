@@ -1,0 +1,26 @@
+{
+    "name": "funstaff/ref-lib-ris-bundle",
+    "type": "symfony-bundle",
+    "description": "Funstaff RefLibRisBundle",
+    "require": {
+        "php": ">=7.0",
+        "funstaff/ref-lib-ris": "^1.0"
+    },
+    "require-dev": {
+        "symfony/config": "^3.0",
+        "phpunit/phpunit": "^5.7"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bertrand Zuchuat",
+            "email": "bertrand.zuchuat@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Funstaff\\RefLibRisBundle\\": "" },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    }
+}
