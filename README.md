@@ -33,7 +33,7 @@ ref_lib_ris:
 ```
 
 ## Use
-```yml
+```php
 $recordDb = [
     'type' => ['BOOK'],
     'author' => ['Book Author'],
