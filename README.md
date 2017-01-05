@@ -1,6 +1,8 @@
 RefLibRisBundle
 ===
 
+[![Build Status](https://travis-ci.org/Funstaff/RefLibRisBundle.svg?branch=master)](https://travis-ci.org/Funstaff/RefLibRisBundle)
+
 * Author: Bertrand Zuchuat <bertrand.zuchuat@gmail.com>
 * License: MIT
 
