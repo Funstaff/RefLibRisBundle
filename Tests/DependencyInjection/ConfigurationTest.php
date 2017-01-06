@@ -21,7 +21,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->expectException(InvalidConfigurationException::class);
         $config = [];
         $processor = new Processor();
-        $configuration = new Configuration([], []);
+        $configuration = new Configuration();
         $processor->processConfiguration($configuration, $config);
     }
 
@@ -36,7 +36,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
             ],
         ]];
         $processor = new Processor();
-        $configuration = new Configuration([], []);
+        $configuration = new Configuration();
         $config = $processor->processConfiguration($configuration, $config);
 
         $this->assertEquals('Funstaff\RefLibRis\RisFieldsMapping', $config['classes']['ris_fields_mapping']);
@@ -59,7 +59,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
             ],
         ]];
         $processor = new Processor();
-        $configuration = new Configuration([], []);
+        $configuration = new Configuration();
         $config = $processor->processConfiguration($configuration, $config);
 
         $this->assertEquals('Funstaff\RefLibRis\FooBar', $config['classes']['ris_fields_mapping']);
@@ -77,7 +77,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
             ],
         ]];
         $processor = new Processor();
-        $configuration = new Configuration([], []);
+        $configuration = new Configuration();
         $processor->processConfiguration($configuration, $config);
     }
 
@@ -93,7 +93,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
             ],
         ]];
         $processor = new Processor();
-        $configuration = new Configuration([], []);
+        $configuration = new Configuration();
         $config = $processor->processConfiguration($configuration, $config);
 
         $this->assertEquals(['BOOK'], $config['mapping_fields']['TY']);
