@@ -22,7 +22,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $config = [];
         $processor = new Processor();
         $configuration = new Configuration([], []);
-        $processor->processConfiguration($configuration, [$config]);
+        $processor->processConfiguration($configuration, $config);
     }
 
     /**
@@ -30,14 +30,14 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultClasses()
     {
-        $config = [
+        $config = [[
             'mapping_fields' => [
                 'TY' => ['BOOK'],
             ],
-        ];
+        ]];
         $processor = new Processor();
         $configuration = new Configuration([], []);
-        $config = $processor->processConfiguration($configuration, [$config]);
+        $config = $processor->processConfiguration($configuration, $config);
 
         $this->assertEquals('Funstaff\RefLibRis\RisFieldsMapping', $config['classes']['ris_fields_mapping']);
         $this->assertEquals('Funstaff\RefLibRis\RecordProcessing', $config['classes']['record_processing']);
@@ -50,17 +50,17 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function testClasses()
     {
-        $config = [
+        $config = [[
             'classes' => [
                 'ris_fields_mapping' => 'Funstaff\RefLibRis\FooBar',
             ],
             'mapping_fields' => [
                 'TY' => ['BOOK'],
             ],
-        ];
+        ]];
         $processor = new Processor();
         $configuration = new Configuration([], []);
-        $config = $processor->processConfiguration($configuration, [$config]);
+        $config = $processor->processConfiguration($configuration, $config);
 
         $this->assertEquals('Funstaff\RefLibRis\FooBar', $config['classes']['ris_fields_mapping']);
     }
@@ -71,14 +71,14 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     public function testMappingWithMissingFieldTY()
     {
         $this->expectException(InvalidConfigurationException::class);
-        $config = [
+        $config = [[
             'mapping_fields' => [
                 'AU' => ['author'],
             ],
-        ];
+        ]];
         $processor = new Processor();
         $configuration = new Configuration([], []);
-        $processor->processConfiguration($configuration, [$config]);
+        $processor->processConfiguration($configuration, $config);
     }
 
     /**
@@ -86,15 +86,15 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function testMapping()
     {
-        $config = [
+        $config = [[
             'mapping_fields' => [
                 'TY' => ['BOOK'],
                 'AU' => ['author'],
             ],
-        ];
+        ]];
         $processor = new Processor();
         $configuration = new Configuration([], []);
-        $config = $processor->processConfiguration($configuration, [$config]);
+        $config = $processor->processConfiguration($configuration, $config);
 
         $this->assertEquals(['BOOK'], $config['mapping_fields']['TY']);
         $this->assertEquals(['author'], $config['mapping_fields']['AU']);
