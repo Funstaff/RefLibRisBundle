@@ -39,7 +39,7 @@ class Configuration implements ConfigurationInterface
                     ->prototype('scalar')->end()
                 ->end()
                 ->validate()
-                ->ifTrue(function ($v) {
+                ->ifTrue(function($v) {
                     return !array_key_exists('TY', $v);
                 })
                 ->thenInvalid('TY field is mandatory')
