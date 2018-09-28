@@ -19,24 +19,36 @@ This bundle provide an interface for [Funstaff RefLibRis](https://github.com/Fun
 __Minimal configuration__
 ```yml
 ref_lib_ris:
-    mapping_fields:
-        TY: ['type']
-        AU: ['creator', 'author']
-        ...
+    fallback: 'default'
+    mappings:
+        default:
+            TY: ['type']
+            AU: ['creator', 'author']
+            SN: ['isbn', 'issn']
+        BOOK:
+            TY: ['type']
+            AU: ['creator', 'author']
+            ...
 ```
 
 __Full configuration__
 ```yml
 ref_lib_ris:
     classes:
-        ris_fields_mapping: 'Funstaff\RefLibRis\RisFieldsMapping'
+        ris_mappings: 'Funstaff\RefLibRis\RisMappings'
         record_processing: 'Funstaff\RefLibRis\RecordProcessing'
         ris_definition: 'Funstaff\RefLibRis\RisDefinition'
         ris_writer: 'Funstaff\RefLibRis\RisWriter'
-    mapping_fields:
-        TY: ['type']
-        AU: ['creator', 'author']
-        ...
+    fallback: 'default'
+    mappings:
+        default:
+            TY: ['type']
+            AU: ['creator', 'author']
+            SN: ['isbn', 'issn']
+        BOOK:
+            TY: ['type']
+            AU: ['creator', 'author']
+            ...
 ```
 
 ## Use
@@ -47,8 +59,11 @@ $recordDb = [
     'title' => ['Book Title'],
 ];
 
-$record = $this->get('ref_lib_ris.record_processing')->process($recordDb);
-$ris = $this->get('ref_lib_ris.ris_writer')->addRecord($record)->process();
+record = $this->get('ref_lib_ris.record_processing')
+            ->process($recordDb);
+$ris = $this->get('ref_lib_ris.ris_writer')
+            ->addRecord($record)
+            ->process();
 ```
 
 ## Found a bug
