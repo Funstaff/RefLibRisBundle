@@ -4,7 +4,7 @@
     "description": "Funstaff RefLibRisBundle",
     "require": {
         "php": ">=7.0",
-        "funstaff/ref-lib-ris": "^1.0"
+        "funstaff/ref-lib-ris": "^2.0"
     },
     "require-dev": {
         "symfony/config": "^3.0",
