@@ -31,15 +31,19 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     public function testDefaultClasses()
     {
         $config = [[
-            'mapping_fields' => [
-                'TY' => ['BOOK'],
+            'fallback' => 'default',
+            'mappings' => [
+                'BOOK' => [
+                    'TY' => ['BOOK'],
+                ]
             ],
         ]];
         $processor = new Processor();
         $configuration = new Configuration();
         $config = $processor->processConfiguration($configuration, $config);
 
-        $this->assertEquals('Funstaff\RefLibRis\RisFieldsMapping', $config['classes']['ris_fields_mapping']);
+        $this->assertEquals('default', $config['fallback']);
+        $this->assertEquals('Funstaff\RefLibRis\RisMappings', $config['classes']['ris_mappings']);
         $this->assertEquals('Funstaff\RefLibRis\RecordProcessing', $config['classes']['record_processing']);
         $this->assertEquals('Funstaff\RefLibRis\RisDefinition', $config['classes']['ris_definition']);
         $this->assertEquals('Funstaff\RefLibRis\RisWriter', $config['classes']['ris_writer']);
@@ -52,17 +56,20 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         $config = [[
             'classes' => [
-                'ris_fields_mapping' => 'Funstaff\RefLibRis\FooBar',
+                'ris_mappings' => 'Funstaff\RefLibRis\FooBar',
             ],
-            'mapping_fields' => [
-                'TY' => ['BOOK'],
+            'fallback' => 'default',
+            'mappings' => [
+                'BOOK' => [
+                    'TY' => ['BOOK'],
+                ]
             ],
         ]];
         $processor = new Processor();
         $configuration = new Configuration();
         $config = $processor->processConfiguration($configuration, $config);
 
-        $this->assertEquals('Funstaff\RefLibRis\FooBar', $config['classes']['ris_fields_mapping']);
+        $this->assertEquals('Funstaff\RefLibRis\FooBar', $config['classes']['ris_mappings']);
     }
 
     /**
@@ -72,8 +79,10 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         $this->expectException(InvalidConfigurationException::class);
         $config = [[
-            'mapping_fields' => [
-                'AU' => ['author'],
+            'mappings' => [
+                'BOOK' => [
+                    'AU' => ['author'],
+                ]
             ],
         ]];
         $processor = new Processor();
@@ -87,16 +96,19 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     public function testMapping()
     {
         $config = [[
-            'mapping_fields' => [
-                'TY' => ['BOOK'],
-                'AU' => ['author'],
+            'fallback' => 'default',
+            'mappings' => [
+                'BOOK' => [
+                    'TY' => ['BOOK'],
+                    'AU' => ['author'],
+                ]
             ],
         ]];
         $processor = new Processor();
         $configuration = new Configuration();
         $config = $processor->processConfiguration($configuration, $config);
 
-        $this->assertEquals(['BOOK'], $config['mapping_fields']['TY']);
-        $this->assertEquals(['author'], $config['mapping_fields']['AU']);
+        $this->assertEquals('default', $config['fallback']);
+        $this->assertEquals(['BOOK' => ['TY' => ['BOOK'], 'AU' => ['author']]], $config['mappings']);
     }
 }

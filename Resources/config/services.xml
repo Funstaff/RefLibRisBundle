@@ -5,17 +5,18 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="ref_lib_ris.ris_fields_mapping" class="%ref_lib_ris.ris_fields_mapping.class%">
-            <argument>%ref_lib_ris.mapping_fields%</argument>
+        <service id="ref_lib_ris.ris_mappings" class="%ref_lib_ris.ris_mappings.class%">
+            <argument>%ref_lib_ris.mappings%</argument>
+            <argument>%ref_lib_ris.fallback%</argument>
         </service>
 
-        <service id="ref_lib_ris.record_processing" class="%ref_lib_ris.record_processing.class%">
-            <argument type="service" id="ref_lib_ris.ris_fields_mapping" />
+        <service id="ref_lib_ris.record_processing" class="%ref_lib_ris.record_processing.class%" public="true">
+            <argument type="service" id="ref_lib_ris.ris_mappings" />
         </service>
 
         <service id="ref_lib_ris.ris_definition" class="%ref_lib_ris.ris_definition.class%" />
 
-        <service id="ref_lib_ris.ris_writer" class="%ref_lib_ris.ris_writer.class%">
+        <service id="ref_lib_ris.ris_writer" class="%ref_lib_ris.ris_writer.class%" public="true">
             <argument type="service" id="ref_lib_ris.ris_definition" />
         </service>
     </services>
