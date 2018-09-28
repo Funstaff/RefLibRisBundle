@@ -38,7 +38,7 @@ class Configuration implements ConfigurationInterface
                     ->useAttributeAsKey('name')
                     ->prototype('array')
                         ->requiresAtLeastOneElement()
-                        ->arrayPrototype()
+                        ->prototype('array')
                             ->useAttributeAsKey('name')
                             ->prototype('scalar')->end()
                         ->end()
